@@ -63,7 +63,7 @@ public class SecurityConfig {
                 .anyRequest().authenticated()//а в остальные запросы - только авторизованные
                 .and()
                 .formLogin((form) -> form
-//                        .loginProcessingUrl("/myLoginProcess")
+                        .loginProcessingUrl("/myLoginProcessing") //Это адрес конечной точки, куда по методу POST отправляются имя и пароль при нажатии кнопки входа в форме логина
                         .loginPage("/mylogin")
                         .defaultSuccessUrl("/hello", true)
                         .permitAll()

@@ -37,7 +37,10 @@
     Invalid username and password.</div>
 <div th:if="${param.logout}">
     You have been logged out.</div>
-<form th:action="@{/mylogin}" method="post">
+<!--<form th:action="@{/mylogin}" method="post">-->
+<!-- myLoginProcessing = .loginProcessingUrl("/myLoginProcessing") в securityFilterChain -->
+<form th:action="@{/myLoginProcessing}" method="post">
+
     <div>
         <input type="text" name="username" placeholder="Username"/>
     </div>

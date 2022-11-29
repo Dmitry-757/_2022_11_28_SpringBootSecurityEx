@@ -2,6 +2,7 @@ package org.dng.springbootsecurityex.Controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -21,9 +22,12 @@ public class AuthController {
         return "myloginPage";
     }
 
-    @GetMapping("/myloginPage")
-    public String myloginPage() {
-        return "myloginPage";
+    //***** не перехватывается (( хотя пост-запрос из myloginPage отправляется именно сюда
+    @PostMapping("/myLoginProcessing")
+//    public String myloginPage() {
+    public void myloginPage() {
+        System.out.println("catch '/myLoginProcessing' ");
+//        return "myloginPage";
     }
 
 }
