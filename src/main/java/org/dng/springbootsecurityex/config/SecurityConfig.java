@@ -24,25 +24,25 @@ public class SecurityConfig {
 
     @Bean
     public UserDetailsService userDetailsService(BCryptPasswordEncoder bCryptPasswordEncoder) {
-        UserDetails user =
-//                User.withDefaultPasswordEncoder()
-//                        .username("user")
-//                        .password("password")
-//                        .roles("USER")
-//                        .build();
-
-        User.builder()
-                .username("user")
-                .password(bCryptPasswordEncoder.encode("userPass"))
-                .roles("USER")
-                .username("Admin")
-                .password(bCryptPasswordEncoder.encode("adminPass"))
-                .roles("ADMIN")
-                .build();
+//        UserDetails user =
+////                User.withDefaultPasswordEncoder()
+////                        .username("user")
+////                        .password("password")
+////                        .roles("USER")
+////                        .build();
+//
+//        User.builder()
+//                .username("user")
+//                .password(bCryptPasswordEncoder.encode("userPass"))
+//                .roles("USER")
+//                .username("Admin")
+//                .password(bCryptPasswordEncoder.encode("adminPass"))
+//                .roles("ADMIN")
+//                .build();
         List<UserDetails> ul = List.of(
                 User.builder()
                         .username("user")
-                        .password(bCryptPasswordEncoder.encode("userPass"))
+                        .password(bCryptPasswordEncoder.encode("123"))
                         .roles("USER")
                         .build(),
                 User.builder()
@@ -58,44 +58,33 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
-                .authorizeHttpRequests()
+                .authorizeHttpRequests() //Это строкой мы говорим предоставить разрешения для следующих url.
                 .requestMatchers("/", "/mylogin", "/resources/**").permitAll() //сюда можно всем
-//                .anyRequest().authenticated()//а в остальные запросы - только авторизованные
+                .anyRequest().authenticated()//а в остальные запросы - только авторизованные
                 .and()
-//                .formLogin((form) -> form
+                .formLogin((form) -> form
 //                        .loginProcessingUrl("/myLoginProcess")
-//                        .loginPage("/mylogin")
-//                        .defaultSuccessUrl("/hello", true)
-//                        .permitAll()
-//                )
-                .formLogin()
+                        .loginPage("/mylogin")
+                        .defaultSuccessUrl("/hello", true)
+                        .permitAll()
+                )
+//                .formLogin()
 //                .loginPage("/login")
 //                .loginProcessingUrl("/process-login")
-                .defaultSuccessUrl("/hello")
-////                .failureUrl("/login?error=true")
-//                .permitAll()
-                .and()
+//                .defaultSuccessUrl("/hello")
+//                .and()
                 .logout()
                 .logoutSuccessUrl("/")
                 .and()
                 .csrf()
                 .disable()
                 ;
-//                .hasRole("USER")
-//                .and()
-////                .formLogin()
-//                .formLogin((form) -> form
-//                        .loginPage("/login.html")
-//                        .defaultSuccessUrl("/", true)
-//                        .permitAll()
-//                )
-//                .logout()
-//                .logoutSuccessUrl("/login.html")
-//                .and()
-//                .csrf()
-//                .disable();
-//        ;
 
+//        http
+//                .formLogin(form -> form
+//                        .loginPage("/myloginPage")
+//                        .permitAll()
+//                );
 
 
         return http.build();

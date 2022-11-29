@@ -16,8 +16,13 @@ public class AuthController {
         int i=0;
         return (new ModelAndView("helloPage")).addObject("principal", principal);
     }
-    @GetMapping("/login")
+    @GetMapping("/mylogin")
     public String login() {
+        return "myloginPage";
+    }
+
+    @GetMapping("/myloginPage")
+    public String myloginPage() {
         return "myloginPage";
     }
 
